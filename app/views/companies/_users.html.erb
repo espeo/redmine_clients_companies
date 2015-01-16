@@ -1,0 +1,39 @@
+<div class="splitcontentleft">
+<% if @company.users.any? %>
+  <table class="list users">
+    <thead><tr>
+      <th><%= l(:label_user) %></th>
+      <th style="width:15%"></th>
+    </tr></thead>
+    <tbody>
+    <% @company.users.sort.each do |user| %>
+      <tr id="user-<%= user.id %>" class="<%= cycle 'odd', 'even' %>">
+        <td class="name"><%= link_to_user user %></td>
+        <td class="buttons">
+          <%= delete_link company_user_path(@company, :user_id => user), :remote => true %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+</div>
+
+<div class="splitcontentright">
+  <%= form_for(@company, :remote => true, :url => company_users_path(@company),
+               :html => {:method => :post}) do |f| %>
+    <fieldset><legend><%=l(:label_user_new)%></legend>
+
+    <p><%= label_tag "user_search", l(:label_user_search) %><%= text_field_tag 'user_search', nil %></p>
+    <%= javascript_tag "observeSearchfield('user_search', null, '#{ escape_javascript autocomplete_for_user_company_path(@company) }')" %>
+
+    <div id="users">
+      <%= render_principals_for_new_company_users(@company) %>
+    </div>
+
+    <p><%= submit_tag l(:button_add) %></p>
+    </fieldset>
+  <% end %>
+</div>

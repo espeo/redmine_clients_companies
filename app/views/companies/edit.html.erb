@@ -1,0 +1,8 @@
+<div class="contextual">
+<%= link_to l(:label_profile), company_path(@company), :class => 'icon icon-user' %>
+<%= delete_link company_path(@company) %>
+</div>
+
+<%= title [l(:label_company_plural), companies_path], @company.name %>
+
+<%= render_tabs company_settings_tabs %>

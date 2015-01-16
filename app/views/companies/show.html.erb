@@ -1,0 +1,35 @@
+<div class="contextual">
+<%= link_to(l(:button_edit), edit_company_path(@company), :class => 'icon icon-edit') %>
+</div>
+
+<%= title [l(:label_company_plural), companies_path], @company.name %>
+
+<ul>
+  <% if @company.mail.present? %>
+    <li><%=l(:field_mail)%>: <%= mail_to(h(@company.mail), nil, :encode => 'javascript') %></li>
+  <% end %>
+
+  <% @company.visible_custom_field_values.each do |custom_value| %>
+    <% if !custom_value.value.blank? %>
+      <li><%=h custom_value.custom_field.name%>: <%=h show_value(custom_value) %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<% if @company.users.present? %>
+  <h3><%= t(:label_user_plural) %></h3>
+  <ul>
+  <% @company.users.each do |user| %>
+      <li><%=link_to h(user), user %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<% if @company.clients.present? %>
+  <h3><%= t(:label_client_plural) %></h3>
+  <ul>
+  <% @company.clients.each do |client| %>
+      <li><%=link_to h(client), client %></li>
+  <% end %>
+  </ul>
+<% end %>

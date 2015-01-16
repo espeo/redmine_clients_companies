@@ -1,0 +1,8 @@
+<div class="contextual">
+<%= link_to l(:label_profile), client_path(@client), :class => 'icon icon-user' %>
+<%= delete_link client_path(@client) %>
+</div>
+
+<%= title [l(:label_client_plural), clients_path], @client.name %>
+
+<%= render_tabs client_settings_tabs %>

@@ -1,0 +1,53 @@
+<div class="contextual">
+<%= link_to l(:label_client_new), new_client_path, :class => 'icon icon-add' %>
+</div>
+
+<h2><%=l(:label_client_plural)%></h2>
+
+<%= form_tag(clients_path, :method => :get) do %>
+<fieldset><legend><%= l(:label_filter_plural) %></legend>
+
+<% if @groups.present? %>
+<label for='group_id'><%= l(:label_group) %>:</label>
+<%= select_tag 'group_id', content_tag('option') + options_from_collection_for_select(@groups, :id, :name, params[:group_id].to_i), :onchange => "this.form.submit(); return false;"  %>
+<% end %>
+
+<% if @companies.present? %>
+<label for='company_id'><%= l(:label_company) %>:</label>
+<%= select_tag 'company_id', content_tag('option') + options_from_collection_for_select(@companies, :id, :name, params[:company_id].to_i), :onchange => "this.form.submit(); return false;"  %>
+<% end %>
+
+<label for='name'><%= l(:label_client) %>:</label>
+<%= text_field_tag 'name', params[:name], :size => 30 %>
+<%= submit_tag l(:button_apply), :class => "small", :name => nil %>
+<%= link_to l(:button_clear), clients_path, :class => 'icon icon-reload' %>
+</fieldset>
+<% end %>
+&nbsp;
+
+<div class="autoscroll">
+<table class="list">
+  <thead><tr>
+  <%= sort_header_tag('firstname', :caption => l(:field_firstname)) %>
+  <%= sort_header_tag('lastname', :caption => l(:field_lastname)) %>
+  <%= sort_header_tag('mail', :caption => l(:field_mail)) %>
+    <th></th>
+  </tr></thead>
+  <tbody>
+<% for client in @clients -%>
+  <tr class="<%= cycle("odd", "even") %>">
+  <td class="firstname"><%= link_to h(client.firstname), client %></td>
+  <td class="lastname"><%= link_to h(client.lastname), client %></td>
+  <td class="email"><%= mail_to(h(client.mail)) %></td>
+    <td class="buttons">
+      <%= link_to(l(:button_edit), [:edit, client], :class => 'icon icon-edit') %>
+      <%= delete_link client_path(client, :back_url => clients_path(params)) %>
+    </td>
+  </tr>
+<% end -%>
+  </tbody>
+</table>
+</div>
+<p class="pagination"><%= pagination_links_full @client_pages, @client_count %></p>
+
+<% html_title(l(:label_client_plural)) -%>

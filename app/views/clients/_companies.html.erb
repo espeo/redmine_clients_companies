@@ -1,0 +1,9 @@
+<%= form_for(:client, :url => { :action => 'update' }, :html => {:method => :put}) do %>
+<div class="box">
+<% Company.all.sort.each do |company| %>
+<label><%= check_box_tag 'client[company_ids][]', company.id, @client.companies.include?(company), :id => nil %> <%=h company %></label><br />
+<% end %>
+<%= hidden_field_tag 'client[company_ids][]', '' %>
+</div>
+<%= submit_tag l(:button_save) %>
+<% end %>

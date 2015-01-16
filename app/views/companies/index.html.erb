@@ -1,0 +1,28 @@
+<div class="contextual">
+<%= link_to l(:label_company_new), new_company_path, :class => 'icon icon-add' %>
+</div>
+
+<%= title l(:label_company_plural) %>
+<% if @companies.any? %>
+<table class="list companies">
+  <thead><tr>
+  <th><%=l(:label_company)%></th>
+  <th><%=l(:label_user_plural)%></th>
+  <th></th>
+  </tr></thead>
+  <tbody>
+<% @companies.each do |company| %>
+  <tr id="company-<%= company.id %>" class="<%= cycle 'odd', 'even' %>">
+    <td class="name"><%= link_to h(company), company %></td>
+    <td class="user_count"><%= @user_count_by_company_id[company.id] || 0 %></td>
+    <td class="buttons">
+      <%= link_to(l(:button_edit), [:edit, company], :class => 'icon icon-edit') %>
+      <%= delete_link company %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+<% else %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>

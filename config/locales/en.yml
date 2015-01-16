@@ -1,2 +1,9 @@
 en:
-  # my_label: "My label"
+  label_company: Company
+  label_company_new: New company
+  label_company_plural: Companies
+
+  label_client: Client
+  label_client_new: New client
+  label_client_plural: Clients
+  label_client_search: "Search for client:"
