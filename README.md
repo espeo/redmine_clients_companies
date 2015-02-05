@@ -4,7 +4,7 @@
 
 ## Description
 
-Adds clients & companies modules and its CRUD controllers.
+Adds `Client` and `Company` models (similar to `User` and `Group`) and its CRUD controllers.
 
 ## Requirements
 
