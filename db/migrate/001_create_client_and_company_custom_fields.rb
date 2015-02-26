@@ -15,17 +15,17 @@ class CreateClientAndCompanyCustomFields < ActiveRecord::Migration
       field_format: "text",
     })
 
-    ClientCustomField.create({
+    EmployeeCustomField.create({
       name: "WWW",
       field_format: "string",
     })
 
-    ClientCustomField.create({
+    EmployeeCustomField.create({
       name: "Phone",
       field_format: "string",
     })
 
-    ClientCustomField.create({
+    EmployeeCustomField.create({
       name: "Address",
       field_format: "text",
     })
