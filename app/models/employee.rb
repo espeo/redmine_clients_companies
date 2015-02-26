@@ -1,4 +1,4 @@
-class Client < Principal
+class Employee < Principal
   include Redmine::SafeAttributes
 
   has_and_belongs_to_many :companies,
@@ -17,11 +17,11 @@ class Client < Principal
   scope :sorted, lambda { order(*User.fields_for_order_statement)}
   scope :in_company, lambda {|company|
     company_id = company.is_a?(Company) ? company.id : company.to_i
-    where("#{Client.table_name}.id IN (SELECT gu.user_id FROM #{table_name_prefix}groups_users#{table_name_suffix} gu WHERE gu.group_id = ?)", company_id)
+    where("#{Employee.table_name}.id IN (SELECT gu.user_id FROM #{table_name_prefix}groups_users#{table_name_suffix} gu WHERE gu.group_id = ?)", company_id)
   }
   scope :not_in_company, lambda {|company|
     company_id = company.is_a?(Company) ? company.id : company.to_i
-    where("#{Client.table_name}.id NOT IN (SELECT gu.user_id FROM #{table_name_prefix}groups_users#{table_name_suffix} gu WHERE gu.group_id = ?)", company_id)
+    where("#{Employee.table_name}.id NOT IN (SELECT gu.user_id FROM #{table_name_prefix}groups_users#{table_name_suffix} gu WHERE gu.group_id = ?)", company_id)
   }
 
   safe_attributes 'firstname',
@@ -40,18 +40,18 @@ class Client < Principal
     User::USER_FORMATS[formatter || Setting.user_format] || User::USER_FORMATS[:firstname_lastname]
   end
 
-  # Returns an array of fields names than can be used to make an order statement for clients
-  # according to how client names are displayed
+  # Returns an array of fields names than can be used to make an order statement for employees
+  # according to how employee names are displayed
   # Examples:
   #
-  #   Client.fields_for_order_statement              => ['clients.login', 'clients.id']
-  #   Client.fields_for_order_statement('authors')   => ['authors.login', 'authors.id']
+  #   Employee.fields_for_order_statement              => ['employees.login', 'employees.id']
+  #   Employee.fields_for_order_statement('authors')   => ['authors.login', 'authors.id']
   def self.fields_for_order_statement(table=nil)
     table ||= table_name
     name_formatter[:order].map {|field| "#{table}.#{field}"}
   end
 
-  # Return client's full name for display
+  # Return employee's full name for display
   def name(formatter = nil)
     f = self.class.name_formatter(formatter)
     if formatter

@@ -1,18 +1,18 @@
-require 'espeo_clients_companies/patches/user_patch'
-require 'espeo_clients_companies/patches/users_controller_patch'
-require 'espeo_clients_companies/patches/users_helper_patch'
-require 'espeo_clients_companies/hooks'
+require 'espeo_employees_companies/patches/user_patch'
+require 'espeo_employees_companies/patches/users_controller_patch'
+require 'espeo_employees_companies/patches/users_helper_patch'
+require 'espeo_employees_companies/hooks'
 
-Redmine::Plugin.register :espeo_clients_companies do
-  name 'Clients & Companies plugin'
+Redmine::Plugin.register :espeo_employees_companies do
+  name 'Employees & Companies plugin'
   author 'espeo@jtom.me'
-  description "Adds Client & Company models and its' CRUD controllers."
+  description "Adds Employee & Company models and its' CRUD controllers."
   version '1.0.0'
   url 'http://espeo.pl'
   author_url 'http://jtom.me'
 
-  menu :admin_menu, :clients, {:controller => 'clients'},
-    :caption => :label_client_plural,
+  menu :admin_menu, :employees, {:controller => 'employees'},
+    :caption => :label_employee_plural,
     :after => :users,
     :html => { :class => "users" }
   menu :admin_menu, :companies, {:controller => 'companies'},
@@ -23,9 +23,9 @@ end
 
 Rails.application.config.to_prepare do
   CustomFieldsHelper::CUSTOM_FIELDS_TABS << {
-    :name => 'ClientCustomField',
+    :name => 'EmployeeCustomField',
     :partial => 'custom_fields/index',
-    :label => :label_client_plural
+    :label => :label_employee_plural
   }
 
   CustomFieldsHelper::CUSTOM_FIELDS_TABS << {

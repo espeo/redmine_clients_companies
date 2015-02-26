@@ -1,7 +1,7 @@
 class Company < Principal
   include Redmine::SafeAttributes
 
-  has_and_belongs_to_many :clients,
+  has_and_belongs_to_many :employees,
                           :join_table   => "#{table_name_prefix}groups_users#{table_name_suffix}",
                           :foreign_key => :group_id,
                           :association_foreign_key => :user_id
@@ -23,7 +23,7 @@ class Company < Principal
 
   safe_attributes 'name',
     'mail',
-    'client_ids',
+    'employee_ids',
     'custom_field_values',
     'custom_fields',
     :if => lambda {|group, user| user.admin?}

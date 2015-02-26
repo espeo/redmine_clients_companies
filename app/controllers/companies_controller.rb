@@ -82,7 +82,7 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def autocomplete_for_client
+  def autocomplete_for_employee
     respond_to do |format|
       format.js
     end

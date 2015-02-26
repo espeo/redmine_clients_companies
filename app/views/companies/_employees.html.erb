@@ -1,0 +1,39 @@
+<div class="splitcontentleft">
+<% if @company.employees.any? %>
+  <table class="list employees">
+    <thead><tr>
+      <th><%= l(:label_employee) %></th>
+      <th style="width:15%"></th>
+    </tr></thead>
+    <tbody>
+    <% @company.employees.sort.each do |employee| %>
+      <tr id="employee-<%= employee.id %>" class="<%= cycle 'odd', 'even' %>">
+        <td class="name"><%= link_to h(employee.name), employee %></td>
+        <td class="buttons">
+          <%= delete_link company_employee_path(@company, :employee_id => employee), :remote => true %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+</div>
+
+<div class="splitcontentright">
+  <%= form_for(@company, :remote => true, :url => company_employees_path(@company),
+               :html => {:method => :post}) do |f| %>
+    <fieldset><legend><%=l(:label_employee_new)%></legend>
+
+    <p><%= label_tag "employee_search", l(:label_employee_search) %><%= text_field_tag 'employee_search', nil %></p>
+    <%= javascript_tag "observeSearchfield('employee_search', null, '#{ escape_javascript autocomplete_for_employee_company_path(@company) }')" %>
+
+    <div id="employees">
+      <%= render_principals_for_new_company_employees(@company) %>
+    </div>
+
+    <p><%= submit_tag l(:button_add) %></p>
+    </fieldset>
+  <% end %>
+</div>

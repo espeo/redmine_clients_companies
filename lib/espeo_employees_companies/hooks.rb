@@ -1,4 +1,4 @@
-module EspeoClientsCompanies
+module EspeoEmployeesCompanies
   class Hooks < Redmine::Hook::ViewListener
 
     # Show user's groups & companies in users#show view.

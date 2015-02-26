@@ -25,11 +25,11 @@
   </ul>
 <% end %>
 
-<% if @company.clients.present? %>
-  <h3><%= t(:label_client_plural) %></h3>
+<% if @company.employees.present? %>
+  <h3><%= t(:label_employee_plural) %></h3>
   <ul>
-  <% @company.clients.each do |client| %>
-      <li><%=link_to h(client), client %></li>
+  <% @company.employees.each do |employee| %>
+      <li><%=link_to h(employee), employee %></li>
   <% end %>
   </ul>
 <% end %>

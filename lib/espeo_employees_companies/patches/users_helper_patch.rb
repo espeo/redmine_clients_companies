@@ -1,6 +1,6 @@
 require_dependency 'users_helper'
 
-module EspeoClientsCompanies::Patches::UsersHelperPatch
+module EspeoEmployeesCompanies::Patches::UsersHelperPatch
   def self.included(base)
     base.send :include, InstanceMethods
 
@@ -23,5 +23,5 @@ module EspeoClientsCompanies::Patches::UsersHelperPatch
 end
 
 Rails.application.config.to_prepare do
-  UsersHelper.send :include, EspeoClientsCompanies::Patches::UsersHelperPatch
+  UsersHelper.send :include, EspeoEmployeesCompanies::Patches::UsersHelperPatch
 end

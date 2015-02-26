@@ -3,7 +3,7 @@ pl:
   label_company_new: Nowa firma
   label_company_plural: Firmy
 
-  label_client: Klient
-  label_client_new: Nowy klient
-  label_client_plural: Klienci
-  label_client_search: "Szukaj klienta:"
+  label_employee: Pracownik
+  label_employee_new: Nowy pracownik
+  label_employee_plural: Pracownicy
+  label_employee_search: "Szukaj pracownika:"

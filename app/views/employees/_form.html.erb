@@ -1,11 +1,11 @@
-<%= error_messages_for 'client' %>
+<%= error_messages_for 'employee' %>
 
 <div class="box tabular">
   <p><%= f.text_field :firstname, :required => true %></p>
   <p><%= f.text_field :lastname, :required => true %></p>
   <p><%= f.text_field :mail, :required => false %></p>
 
-  <% @client.custom_field_values.each do |value| %>
-    <p><%= custom_field_tag_with_label :client, value %></p>
+  <% @employee.custom_field_values.each do |value| %>
+    <p><%= custom_field_tag_with_label :employee, value %></p>
   <% end %>
 </div>

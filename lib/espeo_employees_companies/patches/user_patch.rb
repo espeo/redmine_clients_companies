@@ -1,4 +1,4 @@
-module EspeoClientsCompanies::Patches::UserPatch
+module EspeoEmployeesCompanies::Patches::UserPatch
   def self.included(base)
     base.extend         ClassMethods
     base.send :include, InstanceMethods
@@ -30,5 +30,5 @@ module EspeoClientsCompanies::Patches::UserPatch
 end
 
 Rails.application.config.to_prepare do
-  User.send :include, EspeoClientsCompanies::Patches::UserPatch
+  User.send :include, EspeoEmployeesCompanies::Patches::UserPatch
 end

@@ -1,10 +1,10 @@
-# Offers - Clients & Companies
+# Offers - Employees & Companies
 
 ### A redmine plugin by Espeo Software.
 
 ## Description
 
-Adds `Client` and `Company` models (similar to `User` and `Group`) and its CRUD controllers.
+Adds `Employee` and `Company` models (similar to `User` and `Group`) and its CRUD controllers.
 
 ## Requirements
 
@@ -12,7 +12,7 @@ Adds `Client` and `Company` models (similar to `User` and `Group`) and its CRUD 
 
 1. Make sure your redmine installation already meets the above *requirements*.
 
-2. Copy this plugin's contents or check out this repository into `/redmine/plugins/espeo_clients_companies` directory.
+2. Copy this plugin's contents or check out this repository into `/redmine/plugins/espeo_employees_companies` directory.
 
 3. Run `bundle exec rake redmine:plugins:migrate`.
 

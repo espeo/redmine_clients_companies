@@ -1,8 +1,8 @@
-class ClientsController < ApplicationController
+class EmployeesController < ApplicationController
   layout 'admin'
 
   before_filter :require_admin
-  before_filter :find_client, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_employee, :only => [:show, :edit, :update, :destroy]
 
   helper :sort
   include SortHelper
@@ -15,15 +15,15 @@ class ClientsController < ApplicationController
 
     @limit = per_page_option
 
-    scope = Client
+    scope = Employee
     scope = scope.like(params[:name]) if params[:name].present?
     scope = scope.in_company(params[:company_id]) if params[:company_id].present?
     scope = scope.in_group(params[:group_id]) if params[:group_id].present?
 
-    @client_count = scope.count
-    @client_pages = Paginator.new @client_count, @limit, params['page']
-    @offset ||= @client_pages.offset
-    @clients =  scope.order(sort_clause).limit(@limit).offset(@offset).all
+    @employee_count = scope.count
+    @employee_pages = Paginator.new @employee_count, @limit, params['page']
+    @offset ||= @employee_pages.offset
+    @employees =  scope.order(sort_clause).limit(@limit).offset(@offset).all
 
     respond_to do |format|
       format.html {
@@ -41,18 +41,18 @@ class ClientsController < ApplicationController
   end
 
   def new
-    @client = Client.new
+    @employee = Employee.new
   end
 
   def create
-    @client = Client.new
-    @client.safe_attributes = params[:client]
+    @employee = Employee.new
+    @employee.safe_attributes = params[:employee]
 
     respond_to do |format|
-      if @client.save
+      if @employee.save
         format.html {
           flash[:notice] = l(:notice_successful_create)
-          redirect_to(params[:continue] ? new_client_path : @client)
+          redirect_to(params[:continue] ? new_employee_path : @employee)
         }
       else
         format.html { render :action => "new" }
@@ -64,12 +64,12 @@ class ClientsController < ApplicationController
   end
 
   def update
-    @client.safe_attributes = params[:client]
+    @employee.safe_attributes = params[:employee]
 
     respond_to do |format|
-      if @client.save
+      if @employee.save
         flash[:notice] = l(:notice_successful_update)
-        format.html { redirect_to(@client) }
+        format.html { redirect_to(@employee) }
       else
         format.html { render :action => "edit" }
       end
@@ -77,17 +77,17 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    @client.destroy
+    @employee.destroy
 
     respond_to do |format|
-      format.html { redirect_to(clients_path) }
+      format.html { redirect_to(employees_path) }
     end
   end
 
   private
 
-  def find_client
-    @client = Client.find(params[:id])
+  def find_employee
+    @employee = Employee.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render_404
   end

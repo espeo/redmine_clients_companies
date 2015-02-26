@@ -1,10 +1,10 @@
 <div class="contextual">
-<%= link_to l(:label_client_new), new_client_path, :class => 'icon icon-add' %>
+<%= link_to l(:label_employee_new), new_employee_path, :class => 'icon icon-add' %>
 </div>
 
-<h2><%=l(:label_client_plural)%></h2>
+<h2><%=l(:label_employee_plural)%></h2>
 
-<%= form_tag(clients_path, :method => :get) do %>
+<%= form_tag(employees_path, :method => :get) do %>
 <fieldset><legend><%= l(:label_filter_plural) %></legend>
 
 <% if @groups.present? %>
@@ -17,10 +17,10 @@
 <%= select_tag 'company_id', content_tag('option') + options_from_collection_for_select(@companies, :id, :name, params[:company_id].to_i), :onchange => "this.form.submit(); return false;"  %>
 <% end %>
 
-<label for='name'><%= l(:label_client) %>:</label>
+<label for='name'><%= l(:label_employee) %>:</label>
 <%= text_field_tag 'name', params[:name], :size => 30 %>
 <%= submit_tag l(:button_apply), :class => "small", :name => nil %>
-<%= link_to l(:button_clear), clients_path, :class => 'icon icon-reload' %>
+<%= link_to l(:button_clear), employees_path, :class => 'icon icon-reload' %>
 </fieldset>
 <% end %>
 &nbsp;
@@ -34,20 +34,20 @@
     <th></th>
   </tr></thead>
   <tbody>
-<% for client in @clients -%>
+<% for employee in @employees -%>
   <tr class="<%= cycle("odd", "even") %>">
-  <td class="firstname"><%= link_to h(client.firstname), client %></td>
-  <td class="lastname"><%= link_to h(client.lastname), client %></td>
-  <td class="email"><%= mail_to(h(client.mail)) %></td>
+  <td class="firstname"><%= link_to h(employee.firstname), employee %></td>
+  <td class="lastname"><%= link_to h(employee.lastname), employee %></td>
+  <td class="email"><%= mail_to(h(employee.mail)) %></td>
     <td class="buttons">
-      <%= link_to(l(:button_edit), [:edit, client], :class => 'icon icon-edit') %>
-      <%= delete_link client_path(client, :back_url => clients_path(params)) %>
+      <%= link_to(l(:button_edit), [:edit, employee], :class => 'icon icon-edit') %>
+      <%= delete_link employee_path(employee, :back_url => employees_path(params)) %>
     </td>
   </tr>
 <% end -%>
   </tbody>
 </table>
 </div>
-<p class="pagination"><%= pagination_links_full @client_pages, @client_count %></p>
+<p class="pagination"><%= pagination_links_full @employee_pages, @employee_count %></p>
 
-<% html_title(l(:label_client_plural)) -%>
+<% html_title(l(:label_employee_plural)) -%>
