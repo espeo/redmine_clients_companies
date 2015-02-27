@@ -1,9 +1,11 @@
 pl:
   label_company: Firma
+  field_company: Firma
   label_company_new: Nowa firma
   label_company_plural: Firmy
 
   label_employee: Pracownik
+  field_employee: Pracownik
   label_employee_new: Nowy pracownik
   label_employee_plural: Pracownicy
   label_employee_search: "Szukaj pracownika:"

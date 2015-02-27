@@ -1,9 +1,11 @@
 en:
   label_company: Company
+  field_company: Company
   label_company_new: New company
   label_company_plural: Companies
 
   label_employee: Employee
+  field_employee: Employee
   label_employee_new: New employee
   label_employee_plural: Employees
   label_employee_search: "Search for employee:"

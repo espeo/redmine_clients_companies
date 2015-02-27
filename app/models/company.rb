@@ -20,6 +20,7 @@ class Company < Principal
 
   scope :sorted, lambda { order("#{table_name}.lastname ASC") }
   scope :named, lambda {|arg| where("LOWER(#{table_name}.lastname) = LOWER(?)", arg.to_s.strip)}
+  scope :visible, lambda {|*args| where(Company.visible_condition(args.shift || User.current, *args)) }
 
   safe_attributes 'name',
     'mail',
@@ -27,6 +28,12 @@ class Company < Principal
     'custom_field_values',
     'custom_fields',
     :if => lambda {|group, user| user.admin?}
+
+  def self.visible_condition(user)
+    return "1=1" if user.admin?
+    companies_ids = user.companies.map(&:id)
+    "#{table_name}.id IN (#{companies_ids.join(',')})"
+  end
 
   def to_s
     lastname.to_s
