@@ -32,6 +32,7 @@ class Company < Principal
   def self.visible_condition(user)
     return "1=1" if user.admin?
     companies_ids = user.companies.map(&:id)
+    companies_ids << 0 if companies_ids.empty?
     "#{table_name}.id IN (#{companies_ids.join(',')})"
   end
 
